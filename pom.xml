@@ -8,8 +8,8 @@
     <packaging>pom</packaging>
 
 
-    <name>optimagrowth-parent-pom</name>
-    <description>Parent Pom for the optimagrowth project</description>
+    <name>Optima Growth Parent Pom</name>
+    <description>Parent Pom for the Optima Growth Stock Project</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,7 +23,7 @@
     </properties>
 
     <modules>
-        <module>configserver</module>
+        <module>config-server</module>
         <module>licensing-service</module>
     </modules>
     <build>
