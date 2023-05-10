@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   database:
@@ -27,13 +27,17 @@ services:
     ports:
       - "8071:8071"
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: "ostock_dev"
+      ENCRYPT_KEY: ${ENCRYPT_KEY}
     networks:
       backend:
         aliases:
           - "config-server"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8071/actuator/health" ]
+      interval: 2s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
 
   licensing-service:
     image: ostock/licensing-service:0.0.1-SNAPSHOT
@@ -41,13 +45,14 @@ services:
       database:
         condition: service_healthy
       config-server:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
       PROFILE: "dev"
       CONFIGSERVER_URI: "http://config-server:8071"
       CONFIGSERVER_PORT: "8071"
+      ENCRYPT_KEY: ${ENCRYPT_KEY}
     networks:
       backend:
         aliases:
