@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <docker.image.prefix>ostock</docker.image.prefix>
+        <docker.image.prefix>o-stock</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -101,6 +101,7 @@
                         <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
                     </to>
                     <container>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                         <mainClass>com.hoholms.optimagrowth.license.LicenseServiceApplication</mainClass>
                         <entrypoint>
                             <arg>java</arg>
@@ -131,6 +132,7 @@
                         <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
                     </to>
                     <container>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                         <mainClass>com.hoholms.optimagrowth.license.LicenseServiceApplication</mainClass>
                         <entrypoint>
                             <arg>java</arg>

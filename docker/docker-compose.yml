@@ -23,7 +23,7 @@ services:
       retries: 5
 
   config-server:
-    image: ostock/config-server:0.0.1-SNAPSHOT
+    image: o-stock/config-server:0.0.1-SNAPSHOT
     ports:
       - "8071:8071"
     environment:
@@ -40,7 +40,7 @@ services:
       start_period: 5s
 
   licensing-service:
-    image: ostock/licensing-service:0.0.1-SNAPSHOT
+    image: o-stock/licensing-service:0.0.1-SNAPSHOT
     depends_on:
       database:
         condition: service_healthy

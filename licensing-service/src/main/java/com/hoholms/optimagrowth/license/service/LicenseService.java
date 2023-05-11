@@ -8,6 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -19,13 +20,14 @@ public class LicenseService {
     private LicenseRepository licenseRepository;
 
     public License getLicense(String organizationId,
-                              String licenseId) {
+                              String licenseId,
+                              Locale locale) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(licenseId, organizationId)
                 .orElseThrow(() -> new IllegalArgumentException(
                                 String.format(
                                         messages.getMessage(
                                                 "license.search.error.message",
-                                                null, null
+                                                null, locale
                                         ),
                                         licenseId,
                                         organizationId
@@ -50,11 +52,13 @@ public class LicenseService {
     }
 
     @Transactional
-    public String deleteLicense(String organizationId, String licenseId) {
+    public String deleteLicense(String organizationId,
+                                String licenseId,
+                                Locale locale) {
         licenseRepository.deleteByOrganizationIdAndLicenseId(organizationId, licenseId);
 
         return String.format(
-                messages.getMessage("license.delete.message", null, null),
+                messages.getMessage("license.delete.message", null, locale),
                 licenseId,
                 organizationId
         );
