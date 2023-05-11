@@ -1,14 +1,13 @@
 package com.hoholms.optimagrowth.license.model.utils;
 
+import static java.util.Arrays.asList;
+
+import java.io.Serial;
+import java.util.ArrayList;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
-
-import java.io.Serial;
-import java.util.ArrayList;
-
-import static java.util.Arrays.asList;
 
 @EqualsAndHashCode(callSuper = false)
 @Getter

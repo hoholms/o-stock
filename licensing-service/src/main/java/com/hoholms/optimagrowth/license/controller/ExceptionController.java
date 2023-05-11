@@ -1,5 +1,7 @@
 package com.hoholms.optimagrowth.license.controller;
 
+import static java.util.Collections.singletonMap;
+
 import com.hoholms.optimagrowth.license.model.utils.ErrorMessage;
 import com.hoholms.optimagrowth.license.model.utils.ResponseWrapper;
 import com.hoholms.optimagrowth.license.model.utils.RestErrorList;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import static java.util.Collections.singletonMap;
 
 @ControllerAdvice
 @EnableWebMvc
