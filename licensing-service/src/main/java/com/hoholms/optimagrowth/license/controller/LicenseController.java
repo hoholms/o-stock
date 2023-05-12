@@ -15,52 +15,45 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class LicenseController {
 
-    private LicenseService licenseService;
+  private LicenseService licenseService;
 
-    @GetMapping(value = "/{licenseId}")
-    public ResponseEntity<License> getLicense(
-            @PathVariable("organizationId") String organizationId,
-            @PathVariable("licenseId") String licenseId,
-            @RequestHeader(value = "Accept-Language", required = false)
-            Locale locale
-    ) {
+  @GetMapping(value = "/{licenseId}")
+  public ResponseEntity<License> getLicense(
+      @PathVariable("organizationId") String organizationId,
+      @PathVariable("licenseId") String licenseId,
+      @RequestHeader(value = "Accept-Language", required = false) Locale locale) {
 
-        License license = licenseService.getLicense(organizationId, licenseId, locale);
-        license.add(
-                linkTo(methodOn(LicenseController.class)
-                        .getLicense(organizationId, license.getLicenseId(), locale))
-                        .withSelfRel(),
-                linkTo(methodOn(LicenseController.class)
-                        .createLicense(license))
-                        .withRel("createLicense"),
-                linkTo(methodOn(LicenseController.class)
-                        .updateLicense(license))
-                        .withRel("updateLicense"),
-                linkTo(methodOn(LicenseController.class)
-                        .deleteLicense(license.getOrganizationId(), license.getLicenseId(), locale))
-                        .withRel("deleteLicense")
-        );
+    License license = licenseService.getLicense(organizationId, licenseId, locale);
+    license.add(
+        linkTo(
+                methodOn(LicenseController.class)
+                    .getLicense(organizationId, license.getLicenseId(), locale))
+            .withSelfRel(),
+        linkTo(methodOn(LicenseController.class).createLicense(license)).withRel("createLicense"),
+        linkTo(methodOn(LicenseController.class).updateLicense(license)).withRel("updateLicense"),
+        linkTo(
+                methodOn(LicenseController.class)
+                    .deleteLicense(license.getOrganizationId(), license.getLicenseId(), locale))
+            .withRel("deleteLicense"));
 
-        return ResponseEntity.ok(license);
-    }
+    return ResponseEntity.ok(license);
+  }
 
-    @PutMapping
-    public ResponseEntity<License> updateLicense(@RequestBody License request) {
-        return ResponseEntity.ok(licenseService.updateLicense(request));
-    }
+  @PutMapping
+  public ResponseEntity<License> updateLicense(@RequestBody License request) {
+    return ResponseEntity.ok(licenseService.updateLicense(request));
+  }
 
-    @PostMapping
-    public ResponseEntity<License> createLicense(@RequestBody License request) {
-        return ResponseEntity.ok(licenseService.createLicense(request));
-    }
+  @PostMapping
+  public ResponseEntity<License> createLicense(@RequestBody License request) {
+    return ResponseEntity.ok(licenseService.createLicense(request));
+  }
 
-    @DeleteMapping(value = "/{licenseId}", produces = "text/plain;charset=UTF-8")
-    public ResponseEntity<String> deleteLicense(
-            @PathVariable("organizationId") String organizationId,
-            @PathVariable("licenseId") String licenseId,
-            @RequestHeader(value = "Accept-Language", required = false)
-            Locale locale
-    ) {
-        return ResponseEntity.ok(licenseService.deleteLicense(organizationId, licenseId, locale));
-    }
+  @DeleteMapping(value = "/{licenseId}", produces = "text/plain;charset=UTF-8")
+  public ResponseEntity<String> deleteLicense(
+      @PathVariable("organizationId") String organizationId,
+      @PathVariable("licenseId") String licenseId,
+      @RequestHeader(value = "Accept-Language", required = false) Locale locale) {
+    return ResponseEntity.ok(licenseService.deleteLicense(organizationId, licenseId, locale));
+  }
 }

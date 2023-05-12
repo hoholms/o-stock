@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LicenseRepository extends JpaRepository<License, String> {
 
-    Optional<License> findByOrganizationIdAndLicenseId(String organizationId, String licenseId);
+  Optional<License> findByOrganizationIdAndLicenseId(String organizationId, String licenseId);
 
-    void deleteByOrganizationIdAndLicenseId(String organizationId, String licenseId);
+  void deleteByOrganizationIdAndLicenseId(String organizationId, String licenseId);
 }

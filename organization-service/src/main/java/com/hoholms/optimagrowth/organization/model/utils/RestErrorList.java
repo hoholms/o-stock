@@ -14,17 +14,16 @@ import org.springframework.http.HttpStatus;
 @Setter
 public class RestErrorList extends ArrayList<ErrorMessage> {
 
-    @Serial
-    private static final long serialVersionUID = -721424777198115589L;
-    private final HttpStatus status;
+  @Serial private static final long serialVersionUID = -721424777198115589L;
+  private final HttpStatus status;
 
-    public RestErrorList(HttpStatus status, ErrorMessage... errors) {
-        this(status.value(), errors);
-    }
+  public RestErrorList(HttpStatus status, ErrorMessage... errors) {
+    this(status.value(), errors);
+  }
 
-    public RestErrorList(int status, ErrorMessage... errors) {
-        super();
-        this.status = HttpStatus.valueOf(status);
-        addAll(asList(errors));
-    }
+  public RestErrorList(int status, ErrorMessage... errors) {
+    super();
+    this.status = HttpStatus.valueOf(status);
+    addAll(asList(errors));
+  }
 }

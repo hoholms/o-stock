@@ -11,5 +11,5 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class ServiceConfig {
 
-    private String property;
+  private String property;
 }

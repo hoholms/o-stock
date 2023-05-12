@@ -8,8 +8,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @RefreshScope
 public class OrganizationServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(OrganizationServiceApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(OrganizationServiceApplication.class, args);
+  }
 }

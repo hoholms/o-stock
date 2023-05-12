@@ -13,10 +13,11 @@ public class OrganizationService {
   private OrganizationRepository repository;
 
   public Organization findById(String organizationId) {
-    return repository.findById(organizationId)
-            .orElseThrow(
+    return repository
+        .findById(organizationId)
+        .orElseThrow(
             () ->
-                    new IllegalArgumentException("Can't find organization with id " + organizationId));
+                new IllegalArgumentException("Can't find organization with id " + organizationId));
   }
 
   public Organization create(Organization organization) {

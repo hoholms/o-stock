@@ -12,14 +12,14 @@ import lombok.Setter;
 @Setter
 public class ResponseWrapper {
 
-    private Object data;
-    private Object metadata;
-    private List<ErrorMessage> errors;
+  private Object data;
+  private Object metadata;
+  private List<ErrorMessage> errors;
 
-    public ResponseWrapper(Object data, Object metadata, List<ErrorMessage> errors) {
-        super();
-        this.data = data;
-        this.metadata = metadata;
-        this.errors = errors;
-    }
+  public ResponseWrapper(Object data, Object metadata, List<ErrorMessage> errors) {
+    super();
+    this.data = data;
+    this.metadata = metadata;
+    this.errors = errors;
+  }
 }

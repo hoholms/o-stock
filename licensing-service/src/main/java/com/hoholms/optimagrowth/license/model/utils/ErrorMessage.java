@@ -9,13 +9,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ErrorMessage {
 
-    private String message;
-    private String code;
-    private String detail;
+  private String message;
+  private String code;
+  private String detail;
 
-    public ErrorMessage(String message, String detail) {
-        super();
-        this.message = message;
-        this.detail = detail;
-    }
+  public ErrorMessage(String message, String detail) {
+    super();
+    this.message = message;
+    this.detail = detail;
+  }
 }
