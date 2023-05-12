@@ -17,7 +17,7 @@ public class LicenseController {
 
     private LicenseService licenseService;
 
-    @GetMapping(value = "/{licenseId}", produces = "text/plain;charset=UTF-8")
+    @GetMapping(value = "/{licenseId}")
     public ResponseEntity<License> getLicense(
             @PathVariable("organizationId") String organizationId,
             @PathVariable("licenseId") String licenseId,
@@ -25,7 +25,7 @@ public class LicenseController {
             Locale locale
     ) {
 
-        License license = licenseService.getLicense(licenseId, organizationId, locale);
+        License license = licenseService.getLicense(organizationId, licenseId, locale);
         license.add(
                 linkTo(methodOn(LicenseController.class)
                         .getLicense(organizationId, license.getLicenseId(), locale))

@@ -2,7 +2,9 @@ package com.hoholms.optimagrowth.license.service;
 
 import com.hoholms.optimagrowth.license.config.ServiceConfig;
 import com.hoholms.optimagrowth.license.model.License;
+import com.hoholms.optimagrowth.license.model.Organization;
 import com.hoholms.optimagrowth.license.repository.LicenseRepository;
+import com.hoholms.optimagrowth.license.service.client.OrganizationFeignClient;
 import java.util.Locale;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -18,10 +20,12 @@ public class LicenseService {
   private MessageSource messages;
   private LicenseRepository licenseRepository;
 
+  private OrganizationFeignClient organizationFeignClient;
+
   public License getLicense(String organizationId, String licenseId, Locale locale) {
     License license =
         licenseRepository
-            .findByOrganizationIdAndLicenseId(licenseId, organizationId)
+            .findByOrganizationIdAndLicenseId(organizationId, licenseId)
             .orElseThrow(
                 () ->
                     new IllegalArgumentException(
@@ -29,6 +33,15 @@ public class LicenseService {
                             messages.getMessage("license.search.error.message", null, locale),
                             licenseId,
                             organizationId)));
+
+    Organization organization = organizationFeignClient.getOrganization(organizationId);
+
+    if (null != organization) {
+      license.setOrganizationName(organization.getName());
+      license.setContactName(organization.getContactName());
+      license.setContactEmail(organization.getContactEmail());
+      license.setContactPhone(organization.getContactPhone());
+    }
 
     return license.withComment(config.getProperty());
   }

@@ -7,18 +7,19 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.6</version>
-        <relativePath/>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.hoholms.optimagrowth</groupId>
-    <artifactId>licensing-service</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <artifactId>organization-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-    <name>License Service</name>
-    <description>O-stock Licensing Service</description>
+    <name>Organization Service</name>
+    <description>O-stock Organization Service</description>
 
     <properties>
         <java.version>17</java.version>
+        <spring-cloud.version>2022.0.2</spring-cloud.version>
         <docker.image.prefix>o-stock</docker.image.prefix>
     </properties>
 
@@ -29,48 +30,34 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-            <version>4.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>4.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>4.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>4.0.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-hateoas</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -82,6 +69,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -105,19 +104,19 @@
                 <version>3.3.1</version>
                 <configuration>
                     <from>
-                        <image>eclipse-temurin:17-jre-alpine</image>
+                        <image>eclipse-temurin:17</image>
                     </from>
                     <to>
                         <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
                     </to>
                     <container>
                         <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                        <mainClass>com.hoholms.optimagrowth.license.LicenseServiceApplication</mainClass>
+                        <mainClass>com.hoholms.optimagrowth.organization.OrganizationServiceApplication</mainClass>
                         <entrypoint>
                             <arg>java</arg>
                             <arg>-cp</arg>
                             <arg>/app/resources:/app/classes:/app/libs/*</arg>
-                            <arg>com.hoholms.optimagrowth.license.LicenseServiceApplication</arg>
+                            <arg>com.hoholms.optimagrowth.organization.OrganizationServiceApplication</arg>
                         </entrypoint>
                     </container>
                 </configuration>
@@ -143,12 +142,12 @@
                     </to>
                     <container>
                         <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                        <mainClass>com.hoholms.optimagrowth.license.LicenseServiceApplication</mainClass>
+                        <mainClass>com.hoholms.optimagrowth.organization.OrganizationServiceApplication</mainClass>
                         <entrypoint>
                             <arg>java</arg>
                             <arg>-cp</arg>
                             <arg>/app/resources:/app/classes:/app/libs/*</arg>
-                            <arg>com.hoholms.optimagrowth.license.LicenseServiceApplication</arg>
+                            <arg>com.hoholms.optimagrowth.organization.OrganizationServiceApplication</arg>
                         </entrypoint>
                     </container>
                 </configuration>

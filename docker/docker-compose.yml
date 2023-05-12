@@ -34,17 +34,42 @@ services:
           - "config-server"
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8071/actuator/health" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  eureka-server:
+    image: o-stock/eureka-server:0.0.1-SNAPSHOT
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - "8070:8070"
+    environment:
+      PROFILE: "default"
+      CONFIGSERVER_URI: "http://config-server:8071"
+      CONFIGSERVER_PORT: "8071"
+      ENCRYPT_KEY: ${ENCRYPT_KEY}
+    networks:
+      backend:
+        aliases:
+          - "eureka-server"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8070/actuator/health" ]
       interval: 2s
       timeout: 3s
       retries: 5
       start_period: 5s
 
   licensing-service:
-    image: o-stock/licensing-service:0.0.1-SNAPSHOT
+    image: o-stock/licensing-service:0.0.2-SNAPSHOT
     depends_on:
       database:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      eureka-server:
         condition: service_healthy
     ports:
       - "8080:8080"
@@ -64,6 +89,8 @@ services:
       database:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      eureka-server:
         condition: service_healthy
     ports:
       - "8079:8079"
