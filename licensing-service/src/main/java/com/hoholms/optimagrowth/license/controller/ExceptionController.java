@@ -21,7 +21,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
   @ExceptionHandler(Exception.class)
   public @ResponseBody ResponseEntity<ResponseWrapper> handleException(
       HttpServletRequest request, ResponseWrapper responseWrapper) {
-    return ResponseEntity.ok(responseWrapper);
+    return new ResponseEntity<>(responseWrapper, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @ExceptionHandler(RuntimeException.class)
@@ -33,6 +33,6 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     ResponseWrapper responseWrapper =
         new ResponseWrapper(null, singletonMap("status", HttpStatus.NOT_ACCEPTABLE), errorList);
 
-    return ResponseEntity.ok(responseWrapper);
+    return new ResponseEntity<>(responseWrapper, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }

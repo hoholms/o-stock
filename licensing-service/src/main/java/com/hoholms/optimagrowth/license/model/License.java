@@ -1,5 +1,6 @@
 package com.hoholms.optimagrowth.license.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ import org.springframework.hateoas.RepresentationModel;
 @Builder
 @Entity
 @Table(name = "licenses")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class License extends RepresentationModel<License> {
 
   @Id
