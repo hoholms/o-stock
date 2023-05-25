@@ -3,6 +3,7 @@ package com.hoholms.optimagrowth.license.utils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
@@ -24,6 +25,7 @@ public class UserContextHolder {
   }
 
   public static void setContext(UserContext context) {
+    Assert.notNull(context, "Only non-null UserContext instances are permitted");
     userContext.set(context);
     log.info("Set new UserContext");
   }

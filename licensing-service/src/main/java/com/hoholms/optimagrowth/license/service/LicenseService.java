@@ -93,7 +93,9 @@ public class LicenseService {
   private void randomlyRunLong() throws TimeoutException {
     Random rand = new Random();
     int randomNum = rand.nextInt((3 - 1) + 1) + 1;
-    if (randomNum == 3) sleep();
+    if (randomNum == 3) {
+      sleep();
+    }
   }
 
   private void sleep() throws TimeoutException {

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrganizationService {
 
-    private OrganizationFeignClient organizationFeignClient;
+  private OrganizationFeignClient organizationFeignClient;
 
-    @CircuitBreaker(name = "organizationService")
-    public Organization getOrganization(String organizationId) {
-        return organizationFeignClient.getOrganization(organizationId);
-    }
+  @CircuitBreaker(name = "organizationService")
+  public Organization getOrganization(String organizationId) {
+    return organizationFeignClient.getOrganization(organizationId);
+  }
 }

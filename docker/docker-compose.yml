@@ -62,6 +62,27 @@ services:
       retries: 5
       start_period: 5s
 
+  gateway-server:
+    image: o-stock/gateway-server:0.0.1-SNAPSHOT
+    depends_on:
+      database:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+    ports:
+      - "8072:8072"
+    environment:
+      PROFILE: "dev"
+      CONFIGSERVER_URI: "http://config-server:8071"
+      CONFIGSERVER_PORT: "8071"
+      ENCRYPT_KEY: ${ENCRYPT_KEY}
+    networks:
+      backend:
+        aliases:
+          - "gateway-server"
+
   licensing-service:
     image: o-stock/licensing-service:0.0.2-SNAPSHOT
     depends_on:
